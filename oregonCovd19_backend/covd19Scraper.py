@@ -76,7 +76,7 @@ caseValues = []
 #Counting to go through td tags for county names and their corresponding positive / deaths data 
 counter = 0
 for case in casesByCounty:
-	#create new Dictionary
+	#County name the following statements will be finding values for
 	if(counter == 0):
 		countyName = case.get_text().strip()
 		counter+=1
