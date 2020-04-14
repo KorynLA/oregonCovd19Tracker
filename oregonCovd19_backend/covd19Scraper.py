@@ -71,8 +71,9 @@ dateFound, tdArray = scrapeOHAWebsite()
 #cases 1 - total cases by county, wrapped in td tag
 casesByCounty=tdArray[1].find_all('td')
 
-#Create array of dictionaries. Each dictionary holds { 'name' : [positve, deaths] }
+#Create array of values [positive, deaths]
 caseValues = []
+#Counting to go through td tags for county names and their corresponding positive / deaths data 
 counter = 0
 for case in casesByCounty:
 	#create new Dictionary
