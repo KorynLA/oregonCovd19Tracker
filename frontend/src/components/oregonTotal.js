@@ -42,7 +42,6 @@ class OregonTotal extends Component {
     lineGenerator.x(d => xScale(new Date(d.date_of_cases)));
     lineGenerator.y(d  => yScale(d[choice]));
     let cases = lineGenerator(data);
-
     //calculate important date lines
     for(let date in dateProp) {
       dateLineGenerator.x(d => xScale(new Date(dateProp[date])));
