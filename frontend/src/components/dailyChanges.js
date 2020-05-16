@@ -39,7 +39,7 @@ export default function DailyChange(props) {
 			if(countyPopulation[i]["countyname"].replace(/\s/g,'').toUpperCase() == name.toUpperCase().replace(/\s/g,'').replace('_', '')) {
 				let quotient=countyPopulation[i].population/10000;
 				//occurances / quotient
-				return Math.round(allData[name][0][choice]/quotient);
+				return Math.ceil(allData[name][0][choice]/quotient);
 			}
 		}
 	}
