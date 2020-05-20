@@ -43,10 +43,14 @@ class OregonTotal extends Component {
     lineGenerator.y(d  => yScale(d[choice]));
     let cases = lineGenerator(data);
     //calculate important date lines
+    const currentTime = new Date();
     for(let date in dateProp) {
-      dateLineGenerator.x(d => xScale(new Date(dateProp[date])));
-      dateLineGenerator.y(d  => yScale(d[choice]));
-      dates.push(dateLineGenerator(data));
+      let dateObj = new Date(dateProp[date]);
+      if(dateObj.getMonth() <= currentTime.getMonth()) {
+        dateLineGenerator.x(d => xScale(new Date(dateProp[date])));
+        dateLineGenerator.y(d  => yScale(d[choice]));
+        dates.push(dateLineGenerator(data));
+      }
     }
     return {cases, dates};
   }

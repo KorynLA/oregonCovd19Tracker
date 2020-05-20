@@ -41,12 +41,11 @@ class App extends Component {
   }
 
   displayDates() {
-    var currentTime = new Date("2020-05-14");
-    var newTime = new Date("2020-05-14");
+    var currentTime = new Date();
     var list = [];
     for(let name in this.state.important) {
       var dateObj = new Date(this.state.important[name]);
-      if(dateObj.getMonth() <= newTime.getMonth()) {
+      if(dateObj.getMonth() <= currentTime.getMonth() && dateObj.getDay()) {
         list.push(<li>{name}: {this.state.important[name].substr(5).replace('-', '/')}</li>);
       }
     }
@@ -67,9 +66,9 @@ class App extends Component {
   displayUserChoiceData() {
     return (
       <div>
-        <h3>Positive Cases</h3>
+        <h3>County Positive Cases</h3>
         <LineChart data={this.state.countyCovdData[this.state.countyChosen]} choice="positive_cases" importantDate={this.state.important}/>
-        <h3> Deaths </h3>
+        <h3>County Deaths </h3>
         <LineChart data={this.state.countyCovdData[this.state.countyChosen]} choice="deaths" importantDate={this.state.important}/>
       </div>
     );
@@ -78,9 +77,9 @@ class App extends Component {
   displayORTotalData(){
     return (
       <div>
-        <h3>Total Oregon Positive Cases</h3>
+        <h3>Oregon Total Positive Cases</h3>
         <OregonTotal data={this.state.totalCovdData} choice = "positive_cases" importantDate={this.state.important}/>
-        <h3>Total Oregon Deaths</h3>
+        <h3>Oregon Total Deaths</h3>
         <OregonTotal data={this.state.totalCovdData} choice = "deaths" importantDate={this.state.important}/>
       </div>
     );

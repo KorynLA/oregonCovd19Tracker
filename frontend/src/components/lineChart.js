@@ -51,11 +51,14 @@ class LineChart extends Component {
       caseLineGenerator.x(d => xScaleCases(new Date(d.date_of_cases)));
       caseLineGenerator.y(d  => yScaleCases(d[choice]));
       cases.push(caseLineGenerator(data[county]));
-
+      const currentTime = new Date();
       for(let date in dateProp) {
-        lineGenerator.x(d => xScaleCases(new Date(dateProp[date])));
-        lineGenerator.y(d  => yScaleCases(d[choice]));
-        dates.push(lineGenerator(data[county]));
+        let dateObj = new Date(dateProp[date]);
+        if(dateObj.getMonth() <= currentTime.getMonth()) {
+          lineGenerator.x(d => xScaleCases(new Date(dateProp[date])));
+          lineGenerator.y(d  => yScaleCases(d[choice]));
+          dates.push(lineGenerator(data[county]));
+        }
       }
     }
     

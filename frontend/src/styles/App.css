@@ -4,19 +4,10 @@ h1, h2 {
 h3 {
 	margin-left: 5%;
 }
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+
 .dateHeader {
 	text-align: center;
-}
-.App-header {
-}
-
-.App-link {
-  color: #61dafb;
+	margin-bottom: 1px;
 }
 .dropdown {
 	font-size: 15px;
@@ -29,14 +20,12 @@ h3 {
 	height: 20px;
 }
 .dates {
-	position: -webkit-sticky; /* Safari */
-  	position: sticky;
-  	top:0;
-	width: 20%;
-	float:right;
-	justify-content: right;
-	border-style: solid;
-	margin-top: 2%;
+	background-color: #e4e4e5;
+	max-width: 50%;
+	margin-right: auto;
+	margin-left: auto;
+	display: block;
+	border-radius: 16px;
 }
 li {
 	list-style: none;

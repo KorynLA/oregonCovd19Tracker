@@ -63,14 +63,16 @@ export default function DailyChange(props) {
 	 		<tr>
 	 			<th>County</th>
 	 			<th>Positives</th>
-	 			<th>% Change</th>
-	 			<th>Case(s) per 10,000</th>
+	 			<th>Change (%)</th>
+	 			<th>County Case(s) per 10,000*</th>
 	 			<th>Deaths </th>
-	 			<th>% Change</th>
-	 			<th>Death(s) per 10,000</th>
+	 			<th>Change (%)</th>
+	 			<th>County Death(s) per 10,000*</th>
 	 		</tr>
 	 		{listItems}
 	 		</table>
+	 		<p>*Based on 2019 county population data 
+	 		from <a href="https://www.pdx.edu/prc/population-reports-estimates">Portland State University</a>.</p>
 	 	</div>
 	 );
 }
