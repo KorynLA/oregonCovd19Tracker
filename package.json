@@ -6,8 +6,8 @@
   "requires": true,
   "lockfileVersion": 1,
   "engines": {
-  "node": "0.10.41",
-  "npm": "1.4.29"
+  "node": "10.16.x",
+  "npm": "6.9.x"
   },
   "dependencies": {
     "bignumber.js": {
