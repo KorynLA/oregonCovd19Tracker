@@ -13,7 +13,7 @@ export default function DailyChange(props) {
     	}
     	const parseData = props.data;
    
-    	let nameArray = [], dataArray = [], day;
+    	let nameArray = [], day;
 		for(let name in parseData) {
 			nameArray.push(name);
 	 		day=new Date(parseData[name][0].date_of_cases);
