@@ -5,6 +5,10 @@
  },
   "requires": true,
   "lockfileVersion": 1,
+  "engines": {
+  "node": "0.10.41",
+  "npm": "1.4.29"
+  },
   "dependencies": {
     "bignumber.js": {
       "version": "9.0.0",
