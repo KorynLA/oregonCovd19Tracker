@@ -95,8 +95,8 @@ class LineChart extends Component {
   }
 
   componentDidUpdate() {
-    d3.select(this.refs.xAxis).call(this.xAxis);
-    d3.select(this.refs.yAxis).call(this.yAxis);
+    d3.select(this.refs.xAxis).transition().call(this.xAxis);
+    d3.select(this.refs.yAxis).transition().call(this.yAxis);
   }
 
   render() {
@@ -107,7 +107,7 @@ class LineChart extends Component {
             {this.displayLines()}
             {displayImportantDates(this.state.dates)}
             <g>
-        
+              {this.displayLegend()}
               <g ref='xAxis' transform={`translate(0, ${height - margin.bottom})`} />
               <g ref='yAxis' transform={`translate(${margin.left}, 0)`} />
             </g>
