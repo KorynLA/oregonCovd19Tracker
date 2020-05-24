@@ -13,15 +13,22 @@ var easternRouter = require('./routes/eastern');
 var willametteRouter = require('./routes/willamette');
 var centralRouter = require('./routes/central');
 
+
+var rootPath=path.parse(__dirname)["dir"];
+const frontendPath=path.join(rootPath, 'frontend/build')
+
 var app = express();
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+
+// Static files from the React frontend app
+app.use('/', express.static(frontendPath));
+
+//app.use('/', indexRouter);
 app.use('/total', totalRouter);
 app.use('/counties', usersRouter);
 app.use('/metro', metroRouter);
