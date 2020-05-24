@@ -69,7 +69,7 @@ class LineChart extends Component {
   }
 
   displayLines() {
-    console.log(this.state.yScaleCases);
+    console.log(this.state.yScaleCases.range());
     console.log(this.state.xScaleCases);
     console.log(this.state.cases);
     var counter = -1;
@@ -107,7 +107,7 @@ class LineChart extends Component {
             {this.displayLines()}
             {displayImportantDates(this.state.dates)}
             <g>
-              {this.displayLegend()}
+        
               <g ref='xAxis' transform={`translate(0, ${height - margin.bottom})`} />
               <g ref='yAxis' transform={`translate(${margin.left}, 0)`} />
             </g>
