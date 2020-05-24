@@ -10,6 +10,7 @@
   "npm": "6.9.x"
   },
   "dependencies": {
+    "express": "~4.16.1",
     "bignumber.js": {
       "version": "9.0.0",
       "resolved": "https://registry.npmjs.org/bignumber.js/-/bignumber.js-9.0.0.tgz",
