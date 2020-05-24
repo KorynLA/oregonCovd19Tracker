@@ -69,6 +69,9 @@ class LineChart extends Component {
   }
 
   displayLines() {
+    console.log(this.state.yScaleCases);
+    console.log(this.state.xScaleCases);
+    console.log(this.state.cases);
     var counter = -1;
     return this.state.cases.map( line => {
       counter+=1;
