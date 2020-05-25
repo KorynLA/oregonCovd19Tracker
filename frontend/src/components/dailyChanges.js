@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/dailyChanges.css';
 export default function DailyChange(props) {
-	const [day, setDay] = useState("00-00-0000");
+	const [day, setDay] = useState("00-00");
 	const [names, setNames] = useState([]);
 	const [allData, setAllData] = useState([]);
 	const [countyPopulation, setCountyPopulation] = useState([]);
@@ -13,13 +13,12 @@ export default function DailyChange(props) {
     	}
     	const parseData = props.data;
    
-    	let nameArray = [], day;
+    	let nameArray = [];
 		for(let name in parseData) {
 			nameArray.push(name);
-	 		day=new Date(parseData[name][0].date_of_cases);
 	 	}
-
-    	setDay(day.toLocaleDateString("en-US"));
+	 	const day=parseData[nameArray[0]][0].date_of_cases.substr(5,5).replace('-', '/');
+    	setDay(day);
     	setNames(nameArray);
     	setAllData(parseData);
     	setCountyPopulation(props.populationData);

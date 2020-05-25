@@ -5,21 +5,8 @@ import re
 import psycopg2
 import datetime
 import sys
-
-#########
-# Attempts connection to postgreSQL database
-# If connection cannot be created the program exits
-# Returns a tuple with cursor and connection to the databse
-#########
-def connectDatabase():
-	try:
-		connection=psycopg2.connect(
-		)
-	except:
-		print('Cannot connect to database.')
-		sys.exit()
-	cursor=connection.cursor()
-	return (cursor, connection) 
+from connectLocalDB import connectDatabase as localConnection
+from connectHerokuDB import connectDatabase as herokuConnection
 
 #########
 # Scrapes OHA website obtaining all info contained in the tables
@@ -28,7 +15,11 @@ def connectDatabase():
 #########
 def scrapeOHAWebsite():
 	URL = 'https://govstatus.egov.com/OR-OHA-COVID-19'
-	fetchedPage = requests.get(URL)
+	try:
+		fetchedPage = requests.get(URL)
+	except:
+		print(fetchedPage)
+		sys.exit()
 	htmlTree = BeautifulSoup(fetchedPage.content, 'html.parser')
 	cases = htmlTree.find_all('table', 'table table-bordered')
 
@@ -41,14 +32,14 @@ def scrapeOHAWebsite():
 		print("Website not updated today. Try again later.")
 		sys.exit()
 	else:
-		print('Starting database update.')
+		print('Website Scraped.')
 	return  (updatedDate, cases)
 
 #########
 # Uses database connection to update all table data using the scraped OHA info
 # Database connection, cursor, and case information from OHA website is passed to the function
 #########
-def updateDatabase(databaseConnection, databaseCursor, caseDate, name, countyValues):
+def updateDatabase(dbLConnection, dbLCursor, dbHConnection, dbHCursor, caseDate, name, countyValues):
 	if name == 'Grant':
 		command="INSERT INTO _grant (date_of_cases, positive_cases, deaths) VALUES ('{}', '{}', '{}');".format(caseDate, countyValues[0].strip(), countyValues[1].strip())
 	elif name == 'Union':
@@ -58,15 +49,24 @@ def updateDatabase(databaseConnection, databaseCursor, caseDate, name, countyVal
 	else:
 		command="INSERT INTO {} (date_of_cases, positive_cases, deaths) VALUES ('{}', '{}', '{}');".format(name, caseDate, countyValues[0].strip(), countyValues[1].strip())
 	print(command)
-	databaseCursor.execute(command)
-	databaseConnection.commit()
+	dbLCursor.execute(command)
+	dbLConnection.commit()
+	dbHCursor.execute(command)
+	dbHConnection.commit()
 
-cur, con = connectDatabase()
+curL, conL = localConnection()
+curH, conH = herokuConnection()
 dateFound, tdArray = scrapeOHAWebsite()
+
+#Determine if date has already been added to tables (uses total as case)
+command = "SELECT date_of_cases FROM total WHERE total.date_of_cases='{}';".format(dateFound)
+cur.execute(command)
+if curL.fetchall():
+	print("Date already added to tables.")
+	sys.exit()
 
 #cases 1 - total cases by county, wrapped in td tag
 casesByCounty=tdArray[1].find_all('td')
-
 #Create array of values [positive, deaths]
 caseValues = []
 #Counting to go through td tags for county names and their corresponding positive / deaths data 
@@ -82,5 +82,5 @@ for case in casesByCounty:
 	else:
 		caseValues.append(case.get_text())
 		counter = 0
-		updateDatabase(con, cur, dateFound, countyName, caseValues)
+		updateDatabase(conL, curL, conH, curH, dateFound, countyName, caseValues)
 		caseValues = []
