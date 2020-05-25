@@ -55,6 +55,6 @@ router.get('/', function(req, res, next) {
       res.json({clatsop, columbia, tillamook, yamhill, polk, marion, lincoln, linn, benton, lane});
     })
     .catch(e => console.error(e.stack))
-    .finally(()=> client.close())
+    .finally(()=> client.close());
 });
 module.exports = router;

@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 	.then(response => {
 		res.send(JSON.stringify(response.rows));
 	})
-	.catch(error=> { console.log(error); });
-	.finally(()=> client.close())
+	.catch(error=> { console.log(error); })
+	.finally(()=> client.close());
 })
 module.exports = router;

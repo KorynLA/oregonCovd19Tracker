@@ -51,6 +51,6 @@ router.get('/', function(req, res, next) {
        res.json({wasco, sherman, gilliam, jefferson, wheeler, crook, deschutes, lake, klamath});
      })
     .catch(e => console.error(e.stack))
-    .finally(()=> client.close())
+    .finally(()=> client.close());
 });
 module.exports = router;
