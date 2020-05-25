@@ -47,6 +47,6 @@ router.get('/', function(req, res, next) {
       res.json({morrow, umatilla, union, wallowa, baker, grant, harney, malheur});
     })
     .catch(e => console.error(e.stack))
-    .then(()=> client.close())
+    .finally(()=> client.close())
 });
 module.exports = router;

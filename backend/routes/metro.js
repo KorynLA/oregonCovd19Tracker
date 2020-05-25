@@ -31,6 +31,6 @@ router.get('/', function(req, res, next) {
       res.json({clackamas, multnomah, washington, hood_river});
     })
     .catch(e => console.error(e.stack))
-    .then(()=> client.close())
+    .finally(()=> client.close())
 });
 module.exports = router;

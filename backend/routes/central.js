@@ -50,7 +50,7 @@ router.get('/', function(req, res, next) {
     .then(() => {
        res.json({wasco, sherman, gilliam, jefferson, wheeler, crook, deschutes, lake, klamath});
      })
-     .catch(e => console.error(e.stack))
-     .then(()=> client.close())
+    .catch(e => console.error(e.stack))
+    .finally(()=> client.close())
 });
 module.exports = router;

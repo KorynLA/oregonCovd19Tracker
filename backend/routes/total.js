@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
       res.send(JSON.stringify(response.rows));
     })
   	.catch(e => console.error("Query error "+e.stack))
-  	.then(()=> client.close())
+    .finally(()=> client.close())
 });
 
 module.exports = router;
