@@ -16,5 +16,6 @@ router.get('/', function(req, res, next) {
 		res.send(JSON.stringify(response.rows));
 	})
 	.catch(error=> { console.log(error); });
+	.then(()=> client.close())
 })
 module.exports = router;

@@ -35,5 +35,6 @@ router.get('/', function(req, res, next) {
       res.json({douglas, curry, coos, josephine, jackson});
     })
     .catch(e => console.error(e.stack))
+    .then(()=> client.close())
 });
 module.exports = router;
