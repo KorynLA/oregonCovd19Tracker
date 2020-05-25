@@ -1,11 +1,11 @@
-var { Pool } = require('pg');
+var { Client } = require('pg');
 //Creating a pool so user doesn't have to handshake everytime a query is made
-var pool = new Pool({
+var client = new Client({
   connectionString: process.env.DATABASE_URL,
-  max: 20,
-  idleTimeoutMillis: 3000,
-  connectionTimeoutMillis: 2000,
+  ssl: {
+  	rejectUnauthorized: false
+  }
 });
 
 
-module.exports = pool;
+module.exports = client;
