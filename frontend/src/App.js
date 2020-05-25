@@ -24,7 +24,7 @@ class App extends Component {
       fetch('http://localhost:3000/metro'),
       fetch('http://localhost:3000/central'),
       fetch('http://localhost:3000/southwestern'),
-      fetch('http://fierce-bastion-38811.herokuapp.com/total'),
+      fetch('https://fierce-bastion-38811.herokuapp.com/total'),
       fetch('http://localhost:3000/willamette'),
       fetch('http://localhost:3000/counties')
     ])
