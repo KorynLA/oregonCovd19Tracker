@@ -73,7 +73,16 @@ class App extends Component {
       </div>
     );
   }
-
+  displayUserChoiceData2() {
+    return (
+      <div>
+        <h3>County Positive Cases</h3>
+        <LineChart data={this.state.countyCovdData['central']} choice="positive_cases" importantDate={this.state.important}/>
+        <h3>County Deaths </h3>
+        <LineChart data={this.state.countyCovdData['central']} choice="deaths" importantDate={this.state.important}/>
+      </div>
+    );
+  }
   displayORTotalData(){
     return (
       <div>
@@ -98,6 +107,7 @@ class App extends Component {
           {this.displayDates()}
         </div>
         {this.displayUserChoiceData()}
+        {this.displayUserChoiceData2()}
         {this.displayORTotalData()}
       </div>
     );
