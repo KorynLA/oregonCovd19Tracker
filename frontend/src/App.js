@@ -20,13 +20,13 @@ class App extends Component {
 
   componentDidMount() {
     Promise.all([
-      fetch('http://localhost:3000/eastern'),
-      fetch('http://localhost:3000/metro'),
-      fetch('http://localhost:3000/central'),
-      fetch('http://localhost:3000/southwestern'),
+      fetch('https://fierce-bastion-38811.herokuapp.com/eastern'),
+      fetch('https://fierce-bastion-38811.herokuapp.com/metro'),
+      fetch('https://fierce-bastion-38811.herokuapp.com/central'),
+      fetch('https://fierce-bastion-38811.herokuapp.com/southwestern'),
       fetch('https://fierce-bastion-38811.herokuapp.com/total'),
-      fetch('http://localhost:3000/willamette'),
-      fetch('http://localhost:3000/counties')
+      fetch('https://fierce-bastion-38811.herokuapp.com/willamette'),
+      fetch('https://fierce-bastion-38811.herokuapp.com/counties')
     ])
     .then(responses => Promise.all(responses.map(resp => resp.json())))
     .then(([eastern, metro, central, southwestern, total, willamette, counties]) => {
