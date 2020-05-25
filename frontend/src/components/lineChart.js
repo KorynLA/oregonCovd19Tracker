@@ -69,9 +69,6 @@ class LineChart extends Component {
   }
 
   displayLines() {
-    console.log(this.state.yScaleCases.range());
-    console.log(this.state.xScaleCases);
-    console.log(this.state.cases);
     var counter = -1;
     return this.state.cases.map( line => {
       counter+=1;
@@ -95,6 +92,7 @@ class LineChart extends Component {
   }
 
   componentDidUpdate() {
+    d3.selectAll("svg > *").remove();
     d3.select(this.refs.xAxis).transition().call(this.xAxis);
     d3.select(this.refs.yAxis).transition().call(this.yAxis);
   }
