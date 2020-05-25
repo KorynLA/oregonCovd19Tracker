@@ -5,7 +5,12 @@ var client = require('../dbhandler');
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	console.log("Test");
-	client.connect();
+	try {
+		client.connect();
+	}
+	catch(err) {
+		console.log("Error connecting to server" + err);
+	}
 	console.log("connecting");
 	// promise
 	console.log("getting");
