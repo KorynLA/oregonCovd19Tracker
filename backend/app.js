@@ -28,7 +28,7 @@ app.use(cookieParser());
 // Static files from the React frontend app
 app.use('/', express.static(frontendPath));
 
-//app.use('/', indexRouter);
+app.use('/test', indexRouter);
 app.use('/total', totalRouter);
 app.use('/counties', usersRouter);
 app.use('/metro', metroRouter);

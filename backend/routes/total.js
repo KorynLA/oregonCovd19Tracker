@@ -4,22 +4,18 @@ var client = require('../dbhandler');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	console.log("Test");
 	try {
 		client.connect();
 	}
 	catch(err) {
 		console.log("Error connecting to server" + err);
 	}
-	console.log("connecting");
-	// promise
-	console.log("getting");
 	client.query("SELECT distinct date_of_cases, positive_cases, deaths FROM Total ORDER BY date_of_cases DESC")
   	.then(response => {
       res.send(JSON.stringify(response.rows));
     })
   	.catch(e => console.error("Query error "+e.stack))
-  	//client.end();
+  	client.end();
 });
 
 module.exports = router;
