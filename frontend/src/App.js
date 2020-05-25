@@ -53,6 +53,7 @@ class App extends Component {
   }
   dropdown() {
     return (
+    <div>
       <select class="dropdown" name='city' onChange={this.updateCountyChosen}>
         <option value='metro'>Portland Metro</option>
         <option value='willamette'>Willamette Valley and North Coast</option>
@@ -60,29 +61,21 @@ class App extends Component {
         <option value='central'>Central Oregon</option>
         <option value='eastern'>Eastern Oregon</option>
       </select>
+      </div>
     );
   }
 
-  displayUserChoiceData() {
+  displayUserChoiceData(choice) {
     return (
       <div>
-        <h3>County Positive Cases</h3>
-        <LineChart data={this.state.countyCovdData[this.state.countyChosen]} choice="positive_cases" importantDate={this.state.important}/>
-        <h3>County Deaths </h3>
-        <LineChart data={this.state.countyCovdData[this.state.countyChosen]} choice="deaths" importantDate={this.state.important}/>
+        <h3>{choice} Positive Cases</h3>
+        <LineChart data={this.state.countyCovdData[choice]} choice="positive_cases" importantDate={this.state.important}/>
+        <h3>{choice} Deaths </h3>
+        <LineChart data={this.state.countyCovdData[choice]} choice="deaths" importantDate={this.state.important}/>
       </div>
     );
   }
-  displayUserChoiceData2() {
-    return (
-      <div>
-        <h3>County Positive Cases</h3>
-        <LineChart data={this.state.countyCovdData['central']} choice="positive_cases" importantDate={this.state.important}/>
-        <h3>County Deaths </h3>
-        <LineChart data={this.state.countyCovdData['central']} choice="deaths" importantDate={this.state.important}/>
-      </div>
-    );
-  }
+
   displayORTotalData(){
     return (
       <div>
@@ -100,14 +93,18 @@ class App extends Component {
         <h1>
           Oregon COVID-19 Cases
         </h1>
+        <h3>{this.state.countyChosen} Daily Change</h3>
         {this.dropdown()}
         <DailyChange populationData={this.state.countyPopulation} data={this.state.countyCovdData[this.state.countyChosen]} /> 
         <div class="dates">
           <h4 class="dateHeader"> Dates marked on graphs </h4>
           {this.displayDates()}
         </div>
-        {this.displayUserChoiceData()}
-        {this.displayUserChoiceData2()}
+        {this.displayUserChoiceData('metro')}
+        {this.displayUserChoiceData('central')}
+        {this.displayUserChoiceData('southwestern')}
+        {this.displayUserChoiceData('eastern')}
+        {this.displayUserChoiceData('willamette')}
         {this.displayORTotalData()}
       </div>
     );

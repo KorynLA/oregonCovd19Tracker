@@ -57,8 +57,7 @@ export default function DailyChange(props) {
 
 	 return (
 	 	<div>
-	 		<h2> Last Updated: {day} </h2>
-	 		<h3>Daily Increase</h3>
+	 		<h4> Last Updated: {day} </h4>
 	 		<table>
 	 		<tr>
 	 			<th>County</th>

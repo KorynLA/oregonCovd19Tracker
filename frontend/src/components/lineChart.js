@@ -92,7 +92,6 @@ class LineChart extends Component {
   }
 
   componentDidUpdate() {
-    d3.selectAll("svg > *").remove();
     d3.select(this.refs.xAxis).transition().call(this.xAxis);
     d3.select(this.refs.yAxis).transition().call(this.yAxis);
   }

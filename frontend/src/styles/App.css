@@ -1,9 +1,10 @@
-h1, h2 {
+body {
+	text-transform: capitalize;
+}
+h1, h2, h3, h4 {
 	text-align: center;
 }
-h3 {
-	margin-left: 5%;
-}
+
 
 .dateHeader {
 	text-align: center;
