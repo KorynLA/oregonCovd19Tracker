@@ -93,6 +93,7 @@ class App extends Component {
         <h1>
           Oregon COVID-19 Cases
         </h1>
+        <p>All data is from the <a href="https://govstatus.egov.com/OR-OHA-COVID-19">OHA website</a></p>
         <h3>{this.state.countyChosen} Daily Change</h3>
         {this.dropdown()}
         <DailyChange populationData={this.state.countyPopulation} data={this.state.countyCovdData[this.state.countyChosen]} /> 
