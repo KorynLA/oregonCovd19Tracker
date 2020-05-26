@@ -60,7 +60,7 @@ dateFound, tdArray = scrapeOHAWebsite()
 
 #Determine if date has already been added to tables (uses total as case)
 command = "SELECT date_of_cases FROM total WHERE total.date_of_cases='{}';".format(dateFound)
-cur.execute(command)
+curL.execute(command)
 if curL.fetchall():
 	print("Date already added to tables.")
 	sys.exit()
