@@ -54,8 +54,10 @@ def updateDatabase(dbLConnection, dbLCursor, dbHConnection, dbHCursor, caseDate,
 	dbHCursor.execute(command)
 	dbHConnection.commit()
 
+#Connect to Heroku and local Postgres DB clients
 curL, conL = localConnection()
 curH, conH = herokuConnection()
+
 dateFound, tdArray = scrapeOHAWebsite()
 
 #Determine if date has already been added to tables (uses total as case)

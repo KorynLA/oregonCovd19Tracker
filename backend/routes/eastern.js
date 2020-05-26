@@ -1,7 +1,12 @@
+/***
+* Routing to get /eastern data
+* Contains call to heroku DB to query data from all county tables in the Eastern region of OR.  
+***/
+
 var express = require('express');
 var router = express.Router();
 var client = require('../dbhandler');
-/* GET home page. */
+
 router.get('/', function(req, res, next) {
   try {
     client.connect();
@@ -9,7 +14,7 @@ router.get('/', function(req, res, next) {
   catch(err) {
     console.log("Error connecting to server" + err);
   }
-  // promise
+  //Query the database with a promise, return the answer, and set the var to the response found
   let morrow, umatilla, union, wallowa, baker, grant, harney, malheur;
   client.query("SELECT distinct date_of_cases, positive_cases, deaths FROM morrow ORDER BY date_of_cases DESC")
     .then(res => {
@@ -46,7 +51,9 @@ router.get('/', function(req, res, next) {
     .then(() => {
       res.json({morrow, umatilla, union, wallowa, baker, grant, harney, malheur});
     })
+    //Print error found if promise not fulfilled
     .catch(e => console.error(e.stack))
+    //Close client connection, no other requests will be made
     .finally(()=> client.close());
 });
 module.exports = router;
