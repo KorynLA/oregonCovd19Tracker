@@ -2,28 +2,39 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 import '../styles/svgBg.css';
 import { displayImportantDates } from './sharedFunctions'
+
+//Creates dimensions for the graph
 const width = 650;
 const height = 400;
 const margin = {top: 20, right: 5, bottom: 20, left: 35};
 
+//Class is exported and called when the Oregon Total data chart is being created
 class OregonTotal extends Component {
   state = {
-    cases: null, // svg path command for all the high temps
-    // d3 helpers
+    //Variable that contains the line for the case values
+    cases: null, 
+    // d3 helpers for scaling and generating the lines for the graph
     xScale: d3.scaleTime().range([margin.left, width - margin.right]),
     yScale: d3.scaleLinear().range([height - margin.bottom, margin.top]),
     lineGenerator: d3.line(),
     dateLineGenerator: d3.line(),
+    //Array that holds important date lines
     dates: []
   };
-
+  //Creates the axis for the graph
   xAxis = d3.axisBottom().scale(this.state.xScale)
     .tickFormat(d3.timeFormat('%B %d'));
   yAxis = d3.axisLeft().scale(this.state.yScale)
     .tickFormat(d => `${d}`);
 
+/***
+* Invoked before render and during updates
+* Updates the state of the shared variables of the class
+* Returns the state of the newly updated cases array and dates
+***/
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (!nextProps.data) return null; // data hasn't been loaded yet so do nothing
+    // data hasn't been loaded yet so do nothing
+    if (!nextProps.data) return null; 
     
     const {data} = nextProps;
     const dateProp = nextProps.importantDate;
@@ -35,6 +46,7 @@ class OregonTotal extends Component {
     const timeDomain = d3.extent(data, d => new Date(d.date_of_cases));
     const caseMax = d3.max(data, d => d[choice]);
 
+    //calculate the time and amount scaling for the graphs
     xScale.domain(timeDomain);
     yScale.domain([0, caseMax]);
 
@@ -42,6 +54,7 @@ class OregonTotal extends Component {
     lineGenerator.x(d => xScale(new Date(d.date_of_cases)));
     lineGenerator.y(d  => yScale(d[choice]));
     let cases = lineGenerator(data);
+    
     //calculate important date lines
     const currentTime = new Date();
     for(let date in dateProp) {
@@ -54,7 +67,11 @@ class OregonTotal extends Component {
     }
     return {cases, dates};
   }
-
+  
+  /***
+  * Operates on the DOM once the component is updated (different data is passed)
+  * Changes the x and y axis / graph
+  ***/
   componentDidUpdate() {
     d3.select(this.refs.xAxis).call(this.xAxis);
     d3.select(this.refs.yAxis).call(this.yAxis);

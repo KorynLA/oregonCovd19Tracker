@@ -6,6 +6,7 @@ import LineChart from './components/lineChart';
 import DailyChange from './components/dailyChanges';
 import OregonTotal from './components/oregonTotal';
 
+//Main class called in index.js
 class App extends Component {
   state = {
     totalCovdData: {},
@@ -17,7 +18,11 @@ class App extends Component {
     'Halloween':'2020-10-31', 'Veterans Day':'2020-11-11', 'Thanksgiving': '2020-26-11', 'First Day Hanukkah': '2020-12-11', 'Christmas Day': '2020-12-25', 
     'New Years Eve': '2020-12-31', 'New Years Day': '2021-01-01'},
   };
-
+  
+  /***
+  * When component is mounted calls the endpoints containing the data
+  * waits until the data is retrived and sets their state
+  ***/
   componentDidMount() {
     Promise.all([
       fetch('https://fierce-bastion-38811.herokuapp.com/eastern'),
@@ -36,21 +41,28 @@ class App extends Component {
     }).finally(console.log("resolved"));
   }
 
+  //updates the state of countyChosen when user decides to change the daily table to see
   updateCountyChosen = (e) => {
     this.setState({countyChosen: e.target.value});
   }
 
+  /***
+  * Takes the important dates up until todays date and creates an array with a list of the
+  * important dates name and the assocaited value
+  ***/
   displayDates() {
     var currentTime = new Date();
     var list = [];
     for(let name in this.state.important) {
       var dateObj = new Date(this.state.important[name]);
-      if(dateObj.getMonth() <= currentTime.getMonth() && dateObj.getDay()) {
+      if(dateObj.getMonth() <= currentTime.getMonth()) {
         list.push(<li>{name}: {this.state.important[name].substr(5).replace('-', '/')}</li>);
       }
     }
     return list;
   }
+
+  //Creates a dropdown of OR regions for the user to see the daily change data
   dropdown() {
     return (
     <div>
@@ -65,6 +77,11 @@ class App extends Component {
     );
   }
 
+  /***
+  * Calls the linechart graph using "choice" which contains the county name
+  * The county name data and the positive_cases and deaths choice are passed.
+  * Both graphs (positive Cases and deaths are displayed)
+  ***/
   displayUserChoiceData(choice) {
     return (
       <div>
@@ -75,7 +92,11 @@ class App extends Component {
       </div>
     );
   }
-
+  
+  /***
+  * Displays OR positive_cases and deaths.
+  * totalCovdData is passed which is formatted differently from countyCovdData
+  ***/
   displayORTotalData(){
     return (
       <div>
