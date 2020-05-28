@@ -28,13 +28,13 @@ app.use(cookieParser());
 // Static files from the React frontend app
 app.use('/', express.static(frontendPath));
 
-app.use('/test', indexRouter);
-app.use('/total', totalRouter);
-app.use('/counties', usersRouter);
-app.use('/metro', metroRouter);
-app.use('/southwestern', southwesternRouter);
-app.use('/eastern', easternRouter);
-app.use('/willamette', willametteRouter);
-app.use('/central', centralRouter);
+app.use('/api/test', indexRouter);
+app.use('/api/total', totalRouter);
+app.use('/api/counties', usersRouter);
+app.use('/api/metro', metroRouter);
+app.use('/api/southwestern', southwesternRouter);
+app.use('/api/eastern', easternRouter);
+app.use('/api/willamette', willametteRouter);
+app.use('/api/central', centralRouter);
 
 module.exports=app;
