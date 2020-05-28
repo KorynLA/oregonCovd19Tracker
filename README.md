@@ -1,11 +1,18 @@
-## **Tools Used**
+# Oregon COVID-19 Tracker
+## Table of Contents
+   * [Tools Used](#tools_used)
+   * [Frontend](#frontend)
+   * [Backend](#backend)
+   * [Database Schema](#database_schema)
+   * [Deployment](#deployment)
+## **Tools Used** <a name="tools_used"></a>
 The frontend was created with React using the D3JS libray and the backend was created with Nodejs and Express. The data displayed was scraped using python through opening a connection to the Oregon Health Authority website and using BeautifulSoup. The data is loaded into a PostgreSQL database. This was deployed using Heroku. 
 
-## **Frontend Routes**
+## **Frontend Routes** <a name="frontend"></a>
 ### / 
 Main page: Displays the daily changes table. The region to view is chosen by the user with a dropdown form. All regional graphs and OR total graphs are displayed below.
 
-## **Backend Endpoints**
+## **Backend Endpoints** <a name="backend"></a>
 ### /api/total
  - Returns Oregon total data
  - Format: JSON
@@ -54,7 +61,7 @@ Main page: Displays the daily changes table. The region to view is chosen by the
    - Returned as:
      - {"countyName":[{"date_of_cases":"202x-0x-xT00:00:00.000Z","positive_cases":x,"deaths":x}...], ...}
 
-## **Database Schema + Data Model**
+## **Database Schema** <a name="database_schema"></a>
    - There is a table for every county in Oregon. Each county contains the same column names.
      - County tables: Clackamas, hood_river, Multnomah, Washington, Clatsop, Columbia, Tillamook, Yamhill, Polk, Marion, Lincoln, Linn, Benton, Lane, Douglas, Curry, Coos, Josephine, Jackson, Wasco, Sherman, Gilliam, Jefferson, Wheeler, Crook, Deschutes, Lake, Klamath, Morrow, Umatilla, _union, Wallowa, Baker, _grant, Harney and Malheur.
        - **CountyName**(indexed, date_of_cases, positive_cases, deaths) 
@@ -64,7 +71,7 @@ Main page: Displays the daily changes table. The region to view is chosen by the
  - Counties(counties_key, countyname, population)
    - counties_key is the unique identifier
 
-## **Deployment**
+## **Deployment** <a name="deployment"></a>
 This project was deployed using a monorepo. In the main root there is a procfile and package.json file displaying how the project is loaded and ran with Heroku. 
    - The backend is initially ran then the frontend is built as a buildpack and called by the backend server when the user calls the site with the '/' route. 
    - Due to the project being ran as a monorepo, the user has the ability to view the backend routes by adding the route ending to the URL.
