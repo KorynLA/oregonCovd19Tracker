@@ -85,4 +85,4 @@ Main page: Displays the daily changes table. The region to view is chosen by the
 ## **Deployment** <a name="deployment"></a>
 This project was deployed using a monorepo. In the main root there is a procfile and package.json file displaying how the project is loaded and ran with Heroku. 
    - The backend is initially ran then the frontend is built as a buildpack and called by the backend server when the user calls the site with the '/' route. 
-   - Due to the frontend running as a route, the user has the ability to view the backend routes by adding the route ending to the URL. i.e. 'SITE_URL/api/total
+   - Due to the frontend running as a route, the user has the ability to view the backend routes by adding the route ending to the URL. i.e. 'SITE_URL/api/total'
