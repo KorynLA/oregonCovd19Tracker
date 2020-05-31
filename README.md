@@ -14,11 +14,13 @@ Main page: Displays the daily changes table. The region to view is chosen by the
 
 ## **Backend Endpoints** <a name="backend"></a>
 ### /api/total
+ - GET
  - Returns Oregon total data
  - Format: JSON
  - Fields: date_of_cases, deaths, positive_cases
    - Returned as: [{"date_of_cases":"2020-05-26T00:00:00.000Z","positive_cases":3967,"deaths":148} ...]
 ### /api/central
+ - GET
  - Returns county data for Wasco, Sherman, Gilliam, Jefferson, Wheeler, Crook, Deschutes, Lake and Klamath.
  - Format: JSON
  - Fields:
@@ -26,10 +28,12 @@ Main page: Displays the daily changes table. The region to view is chosen by the
    - Returned as:
      - {"countyName":[{"date_of_cases":"202x-0x-xT00:00:00.000Z","positive_cases":x,"deaths":x}...], ...}
 ### /api/counties
+ - GET
  - Returns population data for all counties in Oregon
  - Format: JSON 
  - Fields: countyName, population
 ### /api/eastern
+ - GET
  - Returns county data for Morrow, Umatilla, Union, Wallowa, Baker, Grant, Harney and Malheur.
  - Format: JSON
  - Fields:
@@ -37,6 +41,7 @@ Main page: Displays the daily changes table. The region to view is chosen by the
    - Returned as:
      - {"countyName":[{"date_of_cases":"202x-0x-xT00:00:00.000Z","positive_cases":x,"deaths":x}...], ...}
 ### /api/metro
+ - GET
  - Returns county data for Clackamas, Hood River, Multnomah and eastern Washington.
  - Format: JSON
  - Fields:
@@ -44,9 +49,11 @@ Main page: Displays the daily changes table. The region to view is chosen by the
    - Returned as:
      - {"countyName":[{"date_of_cases":"202x-0x-xT00:00:00.000Z","positive_cases":x,"deaths":x}...], ...}
 ### /api/index
+ - GET
  - Returns dummy data
  - Format: JSON 
 ### /api/southwestern
+ - GET
  - Returns county data for Douglas, Curry, Coos, Josephine and Jackson.
  - Format: JSON
  - Fields:
@@ -54,12 +61,16 @@ Main page: Displays the daily changes table. The region to view is chosen by the
    - Returned as:
      - {"countyName":[{"date_of_cases":"202x-0x-xT00:00:00.000Z","positive_cases":x,"deaths":x}...], ...}
 ### /api/willamette
+ - GET
  - Returns county data for Clatsop, Columbia, Tillamook, Yamhill, Polk, Marion, Lincoln, Linn, Benton and Lane.
  - Format: JSON
  - Fields:
    - countyName, date_of_cases, deaths, positive_cases
    - Returned as:
      - {"countyName":[{"date_of_cases":"202x-0x-xT00:00:00.000Z","positive_cases":x,"deaths":x}...], ...}
+### /
+ - GET
+ - Returns frontend view
 
 ## **Database Schema** <a name="database_schema"></a>
    - There is a table for every county in Oregon. Each county contains the same column names.
@@ -74,4 +85,4 @@ Main page: Displays the daily changes table. The region to view is chosen by the
 ## **Deployment** <a name="deployment"></a>
 This project was deployed using a monorepo. In the main root there is a procfile and package.json file displaying how the project is loaded and ran with Heroku. 
    - The backend is initially ran then the frontend is built as a buildpack and called by the backend server when the user calls the site with the '/' route. 
-   - Due to the project being ran as a monorepo, the user has the ability to view the backend routes by adding the route ending to the URL.
+   - Due to the frontend running as a route, the user has the ability to view the backend routes by adding the route ending to the URL. i.e. 'SITE_URL/api/total
