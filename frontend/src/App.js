@@ -14,7 +14,7 @@ class App extends Component {
     countyCovdData: {},
     countyChosen: 'metro',
     important:{'St.Patricks': '2020-03-17', 'Easter': '2020-04-12', 'Cinco De Mayo': '2020-05-05',
-    "Mother's Day": '2020-05-10', "Phase 1 OR reopen": '2020-05-15','Memorial Day':'2020-05-25', "Father's Day":'2020-06-21', 'Independence Day': '2020-07-04', 'Labor Day':'2020-09-07',
+    "Mother's Day": '2020-05-10', "Phase 1 OR reopen": '2020-05-15','Memorial Day':'2020-05-25', 'George Floyd Protests':'2020-05-29',"Father's Day":'2020-06-21', 'Independence Day': '2020-07-04', 'Labor Day':'2020-09-07',
     'Halloween':'2020-10-31', 'Veterans Day':'2020-11-11', 'Thanksgiving': '2020-26-11', 'First Day Hanukkah': '2020-12-11', 'Christmas Day': '2020-12-25', 
     'New Years Eve': '2020-12-31', 'New Years Day': '2021-01-01'},
   };
@@ -55,8 +55,8 @@ class App extends Component {
     var list = [];
     for(let name in this.state.important) {
       var dateObj = new Date(this.state.important[name]);
-      if(dateObj.getMonth() <= currentTime.getMonth()) {
-        list.push(<li>{name}: {this.state.important[name].substr(5).replace('-', '/')}</li>);
+      if(dateObj.getMonth() < currentTime.getMonth()) {
+        list.push(<tr><td>{name}</td> <td>{this.state.important[name].substr(5).replace('-', '/')}</td></tr>);
       }
     }
     return list;
@@ -120,7 +120,13 @@ class App extends Component {
         <DailyChange populationData={this.state.countyPopulation} data={this.state.countyCovdData[this.state.countyChosen]} /> 
         <div class="dates">
           <h4 class="dateHeader"> Dates marked on graphs </h4>
+          <table>
+            <tr>
+            <th>Name</th>
+            <th>Date</th>
+            </tr>
           {this.displayDates()}
+          </table>
         </div>
         {this.displayUserChoiceData('metro')}
         {this.displayUserChoiceData('central')}

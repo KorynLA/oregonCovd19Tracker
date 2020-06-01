@@ -1,18 +1,9 @@
-th, td {
-  padding-bottom: 5px;
-  padding-right: 10px;
-}
-table {
-	text-align: center;
-	margin-left: auto;
-	display: block;
-	margin-right: auto;
-	background-color:  #e4e4e5;
-	border-radius: 8px;
-	max-width: 60%;
-}
 p {
 	text-align: center;
+}
+table, th, td { 
+	padding-right: 5px;
+	padding-left: 5px;
 }
 a {
 	text-decoration: none;
