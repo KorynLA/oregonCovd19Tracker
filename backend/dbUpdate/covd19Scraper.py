@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from bs4 import BeautifulSoup
 import requests
 from collections import defaultdict
@@ -30,7 +31,6 @@ def scrapeOHAWebsite():
 
 	if(datetime.datetime.strptime(updatedDate, "%m/%d/%Y").date().strftime('%m/%d/%Y') != datetime.date.today().strftime('%m/%d/%Y')):
 		print("Website not updated today. Try again later.")
-		sys.exit()
 	else:
 		print('Website Scraped.')
 	return  (updatedDate, cases)
@@ -54,7 +54,6 @@ def updateDatabase(dbLConnection, dbLCursor, dbHConnection, dbHCursor, caseDate,
 	dbHCursor.execute(command)
 	dbHConnection.commit()
 
-#Connect to Heroku and local Postgres DB clients
 curL, conL = localConnection()
 curH, conH = herokuConnection()
 

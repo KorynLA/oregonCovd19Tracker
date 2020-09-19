@@ -16,20 +16,17 @@ with open('filename.csv', mode='r', encoding='utf-8-sig') as populationFile:
 	reader = csv.reader(populationFile)
 	for row in reader:
 		if row[1] == 'Grant':
-			command="INSERT INTO _grant (date_of_cases, positive_cases, deaths) VALUES ('{}', '{}', '{}');".format(row[0], row[2], row[3])
+			command="INSERT INTO _grant (date_of_cases, positive_cases, deaths) VALUES ('{}', '{}', '{}');".format(row[0], row[2].replace(',',''), row[3].replace(',',''))
 		elif row[1] == 'Union':
-			command="INSERT INTO _union (date_of_cases, positive_cases, deaths) VALUES ('{}', '{}', '{}');".format(row[0], row[2], row[3])
+			command="INSERT INTO _union (date_of_cases, positive_cases, deaths) VALUES ('{}', '{}', '{}');".format(row[0], row[2].replace(',',''), row[3].replace(',',''))
 		elif row[1] == 'Hood River':
-			command="INSERT INTO hood_river (date_of_cases, positive_cases, deaths) VALUES ('{}', '{}', '{}');".format(row[0], row[2], row[3])
+			command="INSERT INTO hood_river (date_of_cases, positive_cases, deaths) VALUES ('{}', '{}', '{}');".format(row[0], row[2].replace(',',''), row[3].replace(',',''))
 		else:
-			command="INSERT INTO {} (date_of_cases, positive_cases, deaths) VALUES ('{}', '{}', '{}');".format(row[1], row[0], row[2], row[3])
+			command="INSERT INTO {} (date_of_cases, positive_cases, deaths) VALUES ('{}', '{}', '{}');".format(row[1], row[0], row[2].replace(',',''), row[3].replace(',',''))
 		print(command)
 		curL.execute(command)
 		conL.commit()
 		curH.execute(command)
 		conH.commit()
-			#cursor.execute(command)
-			#connection.commit()
- #VALUES (%s, %s);
 conL.close()
 conH.close()
